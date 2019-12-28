@@ -1,0 +1,93 @@
+﻿@model jailOtomationSystem.Models.officerStayIn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room Info</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.officerRoom.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officerRoom.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officerRoom.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officerRoom.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officerRoom.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officerRoom.isActive)
+        </dd>
+
+    </dl>
+
+    <h3>
+        Officer Information:
+    </h3>
+
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officer.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officer.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officer.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officer.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officer.AddedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officer.AddedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officer.citizinID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officer.citizinID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officer.dateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officer.dateOfBirth)
+        </dd>
+    @if (Model.officer!=null) {
+        @Html.ActionLink("officer Details", "GetOfficerDetails","Admin" , new { id = Model.officer.officerID },null)
+    }
+    </dl>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

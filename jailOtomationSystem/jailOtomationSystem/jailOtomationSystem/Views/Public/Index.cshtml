@@ -1,0 +1,115 @@
+﻿@model jailOtomationSystem.viewModels.statisticsViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutpublic.cshtml";
+}
+
+<br />
+<div class="row">
+    <!-- ============================================================== -->
+    <!-- four widgets   -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- total views   -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <a class="main-links" href="#">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-inline-block">
+                        <h3>  @Html.DisplayFor(model => model.totalOfficers) </h3>
+                        <h3 class="mb-0"> total Officers </h2>
+                    </div>
+                    <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                        <img width="60" src="~/Content/img/logo.png" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end total views   -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- total followers   -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <a class="main-links" href="#">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-inline-block">
+                        <h3>  @Html.DisplayFor(model => model.totalPrisoners) </h3>
+                        <h3 class="mb-0"> total Prisoners </h3>
+                    </div>
+                    <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                        <img width="60" src="~/Content/img/logo.png" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end total followers   -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- partnerships   -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <a class="main-links" href="#">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-inline-block">
+                        <h3> @Html.DisplayFor(model => model.prisonCapacity) </h3>
+                        <h3 class="mb-0"> prison Capacity </h3>
+                    </div>
+                    <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                        <img width="60" src="~/Content/img/logo.png" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end partnerships   -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- total earned   -->
+    <!-- ============================================================== -->
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <a class="main-links" href="#">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-inline-block">
+                        <h3>  @Html.DisplayFor(model => model.availableOfficersJobs) </h3>
+                        <h3 class="mb-0"> available Jobs </h3>
+                    </div>
+                    <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                        <img width="60" src="~/Content/img/logo.png" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end total earned   -->
+    <!-- ============================================================== -->
+</div>
+<div class="row" style="margin-top:80px;">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 align="center">Ziyaretci kaydi</h2>
+                <form   action="/" method="post">
+                    <input class="form-control" type="text" name="name" value="" placeholder="prisoner id" /><br />
+                    <button align="center;" class="btn btn-success btn-block" type="submit"> Find Prisoner </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<jailOtomationSystem.Models.Prisoner>
+
+@{
+    ViewBag.Title = "GetPrisonersData";
+}
+
+<h2>GetPrisonersData</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="card">
+    <div class="card-body">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.prisonerID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.citizinid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateOfBirth)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prisonerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.citizinid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateOfBirth)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Assign A Job", "AssignAJob", new { id = item.prisonerID }) |
+                        @Html.ActionLink("update", "updateprisoner", new { id = item.prisonerID }) |
+                        @Html.ActionLink("Details", "GetPrisonerDetails", new { id = item.prisonerID }) |
+                        @Html.ActionLink("Delete", "DeletePrisoner", new { id = item.prisonerID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

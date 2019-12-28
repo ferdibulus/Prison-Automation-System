@@ -1,0 +1,108 @@
+﻿@model jailOtomationSystem.viewModels.cellViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>prisonerCell</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.cellType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.cellType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.availableCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.availableCount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cell.prisonerCellID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.prisoners[0].prisonerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prisoners[0].citizinid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prisoners[0].name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prisoners[0].surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prisoners[0].dateOfBirth)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.prisoners)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.prisonerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.citizinid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateOfBirth)
+            </td>
+
+            <td>
+                @Html.ActionLink("Assign A Job", "AssignAJob","Prisoners", new { id = item.prisonerID },null) |
+                @Html.ActionLink("update", "updateprisoner", "Prisoners", new { id = item.prisonerID },null) |
+                @Html.ActionLink("Details", "GetPrisonerDetails", "Prisoners", new { id = item.prisonerID }, null) |
+                @Html.ActionLink("Delete", "DeletePrisoner", "Prisoners", new { id = item.prisonerID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+

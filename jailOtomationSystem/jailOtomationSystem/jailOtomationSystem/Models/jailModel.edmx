@@ -1,0 +1,1046 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adjudication">
+          <Key>
+            <PropertyRef Name="AdjudicationID" />
+          </Key>
+          <Property Name="AdjudicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startDate" Type="date" Nullable="false" />
+          <Property Name="periodInDays" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="crimeDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AdministratorAccount">
+          <Key>
+            <PropertyRef Name="administratorID" />
+          </Key>
+          <Property Name="administratorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfficerID" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="roll" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="facility">
+          <Key>
+            <PropertyRef Name="facilityID" />
+          </Key>
+          <Property Name="facilityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="jobID" />
+          </Key>
+          <Property Name="jobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dailyStartingTime" Type="time" Precision="7" />
+          <Property Name="dailyEndingTime" Type="time" Precision="7" />
+          <Property Name="JobDescription" Type="nvarchar(max)" />
+          <Property Name="facilityid" Type="int" Nullable="false" />
+          <Property Name="availablePositionsCount" Type="int" Nullable="false" />
+          <Property Name="workerType" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="officer">
+          <Key>
+            <PropertyRef Name="officerID" />
+          </Key>
+          <Property Name="officerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rank" Type="nvarchar" MaxLength="20" />
+          <Property Name="citizinID" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="dateOfBirth" Type="date" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="imageURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="officerRoom">
+          <Key>
+            <PropertyRef Name="officerRoomID" />
+          </Key>
+          <Property Name="officerRoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="area" Type="float" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="officerStayIn">
+          <Key>
+            <PropertyRef Name="officerRoomid" />
+            <PropertyRef Name="officerid" />
+          </Key>
+          <Property Name="officerRoomid" Type="int" Nullable="false" />
+          <Property Name="officerid" Type="int" Nullable="false" />
+          <Property Name="since" Type="date" />
+        </EntityType>
+        <EntityType Name="OfficerWorkAs">
+          <Key>
+            <PropertyRef Name="officerid" />
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="officerid" Type="int" Nullable="false" />
+          <Property Name="jobid" Type="int" Nullable="false" />
+          <Property Name="since" Type="date" />
+          <Property Name="until" Type="date" />
+        </EntityType>
+        <EntityType Name="Prisoner">
+          <Key>
+            <PropertyRef Name="prisonerID" />
+          </Key>
+          <Property Name="prisonerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adjudicationid" Type="int" Nullable="false" />
+          <Property Name="citizinid" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateOfBirth" Type="date" />
+          <Property Name="imageURL" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="prisonerCell">
+          <Key>
+            <PropertyRef Name="prisonerCellID" />
+          </Key>
+          <Property Name="prisonerCellID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+          <Property Name="cellType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="area" Type="float" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="availableCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prisonerSatyIn">
+          <Key>
+            <PropertyRef Name="prisonerid" />
+            <PropertyRef Name="prisonerCellid" />
+          </Key>
+          <Property Name="prisonerid" Type="int" Nullable="false" />
+          <Property Name="prisonerCellid" Type="int" Nullable="false" />
+          <Property Name="since" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrisonerWorkAs">
+          <Key>
+            <PropertyRef Name="prisonerid" />
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="prisonerid" Type="int" Nullable="false" />
+          <Property Name="jobid" Type="int" Nullable="false" />
+          <Property Name="since" Type="date" />
+          <Property Name="until" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="times">
+          <Key>
+            <PropertyRef Name="time" />
+          </Key>
+          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="visit">
+          <Key>
+            <PropertyRef Name="visitorID" />
+          </Key>
+          <Property Name="visitorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prisonerid" Type="int" Nullable="false" />
+          <Property Name="visiterName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="visiterSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="relashionship" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateOfVisit" Type="date" Nullable="false" />
+          <Property Name="purposeOfVisit" Type="nvarchar" MaxLength="100" />
+          <Property Name="stuffBringed" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsAccepted" Type="bit" Nullable="false" />
+          <Property Name="VisitTime" Type="time" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jail.dbo.visitTimes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="visitTimes">
+          <Key>
+            <PropertyRef Name="dateOfVisit" />
+          </Key>
+          <Property Name="dateOfVisit" Type="date" Nullable="false" />
+          <Property Name="VisitTime" Type="time" Precision="7" />
+          <Property Name="num" Type="int" />
+        </EntityType>
+        <Association Name="FK_AdministratorAccount_officer">
+          <End Role="officer" Type="Self.officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdministratorAccount" Type="Self.AdministratorAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="AdministratorAccount">
+              <PropertyRef Name="OfficerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_facility">
+          <End Role="facility" Type="Self.facility" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facility">
+              <PropertyRef Name="facilityID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="facilityid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_officerStayIn_officer">
+          <End Role="officer" Type="Self.officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="officerStayIn" Type="Self.officerStayIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="officerStayIn">
+              <PropertyRef Name="officerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_officerStayIn_officerRoom">
+          <End Role="officerRoom" Type="Self.officerRoom" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="officerStayIn" Type="Self.officerStayIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officerRoom">
+              <PropertyRef Name="officerRoomID" />
+            </Principal>
+            <Dependent Role="officerStayIn">
+              <PropertyRef Name="officerRoomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficerWorkAs_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OfficerWorkAs" Type="Self.OfficerWorkAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="jobID" />
+            </Principal>
+            <Dependent Role="OfficerWorkAs">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficerWorkAs_officer">
+          <End Role="officer" Type="Self.officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OfficerWorkAs" Type="Self.OfficerWorkAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="OfficerWorkAs">
+              <PropertyRef Name="officerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prisoner_Adjudication">
+          <End Role="Adjudication" Type="Self.Adjudication" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Prisoner" Type="Self.Prisoner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adjudication">
+              <PropertyRef Name="AdjudicationID" />
+            </Principal>
+            <Dependent Role="Prisoner">
+              <PropertyRef Name="adjudicationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prisonerSatyIn_Prisoner">
+          <End Role="Prisoner" Type="Self.Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="prisonerSatyIn" Type="Self.prisonerSatyIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="prisonerSatyIn">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prisonerSatyIn_prisonerCell">
+          <End Role="prisonerCell" Type="Self.prisonerCell" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="prisonerSatyIn" Type="Self.prisonerSatyIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prisonerCell">
+              <PropertyRef Name="prisonerCellID" />
+            </Principal>
+            <Dependent Role="prisonerSatyIn">
+              <PropertyRef Name="prisonerCellid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrisonerWorkAs_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PrisonerWorkAs" Type="Self.PrisonerWorkAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="jobID" />
+            </Principal>
+            <Dependent Role="PrisonerWorkAs">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrisonerWorkAs_Prisoner">
+          <End Role="Prisoner" Type="Self.Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PrisonerWorkAs" Type="Self.PrisonerWorkAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="PrisonerWorkAs">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visit_Prisoner">
+          <End Role="Prisoner" Type="Self.Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="visit" Type="Self.visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="visit">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAvailableAppointments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numberOfVisitsAtTheSameTime" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="JailModelStoreContainer">
+          <EntitySet Name="Adjudication" EntityType="Self.Adjudication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdministratorAccount" EntityType="Self.AdministratorAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facility" EntityType="Self.facility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="officer" EntityType="Self.officer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="officerRoom" EntityType="Self.officerRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="officerStayIn" EntityType="Self.officerStayIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficerWorkAs" EntityType="Self.OfficerWorkAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prisoner" EntityType="Self.Prisoner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prisonerCell" EntityType="Self.prisonerCell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prisonerSatyIn" EntityType="Self.prisonerSatyIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrisonerWorkAs" EntityType="Self.PrisonerWorkAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="times" EntityType="Self.times" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="visit" EntityType="Self.visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="visitTimes" EntityType="Self.visitTimes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [visitTimes].[dateOfVisit] AS [dateOfVisit], 
+    [visitTimes].[VisitTime] AS [VisitTime], 
+    [visitTimes].[num] AS [num]
+    FROM [dbo].[visitTimes] AS [visitTimes]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AdministratorAccount_officer" Association="Self.FK_AdministratorAccount_officer">
+            <End Role="officer" EntitySet="officer" />
+            <End Role="AdministratorAccount" EntitySet="AdministratorAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_facility" Association="Self.FK_Job_facility">
+            <End Role="facility" EntitySet="facility" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_officerStayIn_officer" Association="Self.FK_officerStayIn_officer">
+            <End Role="officer" EntitySet="officer" />
+            <End Role="officerStayIn" EntitySet="officerStayIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_officerStayIn_officerRoom" Association="Self.FK_officerStayIn_officerRoom">
+            <End Role="officerRoom" EntitySet="officerRoom" />
+            <End Role="officerStayIn" EntitySet="officerStayIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficerWorkAs_Job" Association="Self.FK_OfficerWorkAs_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="OfficerWorkAs" EntitySet="OfficerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficerWorkAs_officer" Association="Self.FK_OfficerWorkAs_officer">
+            <End Role="officer" EntitySet="officer" />
+            <End Role="OfficerWorkAs" EntitySet="OfficerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prisoner_Adjudication" Association="Self.FK_Prisoner_Adjudication">
+            <End Role="Adjudication" EntitySet="Adjudication" />
+            <End Role="Prisoner" EntitySet="Prisoner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prisonerSatyIn_Prisoner" Association="Self.FK_prisonerSatyIn_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoner" />
+            <End Role="prisonerSatyIn" EntitySet="prisonerSatyIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prisonerSatyIn_prisonerCell" Association="Self.FK_prisonerSatyIn_prisonerCell">
+            <End Role="prisonerCell" EntitySet="prisonerCell" />
+            <End Role="prisonerSatyIn" EntitySet="prisonerSatyIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrisonerWorkAs_Job" Association="Self.FK_PrisonerWorkAs_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="PrisonerWorkAs" EntitySet="PrisonerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrisonerWorkAs_Prisoner" Association="Self.FK_PrisonerWorkAs_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoner" />
+            <End Role="PrisonerWorkAs" EntitySet="PrisonerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visit_Prisoner" Association="Self.FK_visit_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoner" />
+            <End Role="visit" EntitySet="visit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="facility">
+          <Key>
+            <PropertyRef Name="facilityID" />
+          </Key>
+          <Property Name="facilityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Jobs" Relationship="JailModel.FK_Job_facility" FromRole="facility" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="officerStayIn">
+          <Key>
+            <PropertyRef Name="officerRoomid" />
+            <PropertyRef Name="officerid" />
+          </Key>
+          <Property Name="officerRoomid" Type="Int32" Nullable="false" />
+          <Property Name="officerid" Type="Int32" Nullable="false" />
+          <Property Name="since" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="officerRoom" Relationship="JailModel.FK_officerStayIn_officerRoom" FromRole="officerStayIn" ToRole="officerRoom" />
+          <NavigationProperty Name="officer" Relationship="JailModel.FK_officerStayIn_officer" FromRole="officerStayIn" ToRole="officer" />
+        </EntityType>
+        <EntityType Name="OfficerWorkA">
+          <Key>
+            <PropertyRef Name="officerid" />
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="officerid" Type="Int32" Nullable="false" />
+          <Property Name="jobid" Type="Int32" Nullable="false" />
+          <Property Name="since" Type="DateTime" Precision="0" />
+          <Property Name="until" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Job" Relationship="JailModel.FK_OfficerWorkAs_Job" FromRole="OfficerWorkA" ToRole="Job" />
+          <NavigationProperty Name="officer" Relationship="JailModel.FK_OfficerWorkAs_officer" FromRole="OfficerWorkA" ToRole="officer" />
+        </EntityType>
+        <EntityType Name="prisonerSatyIn">
+          <Key>
+            <PropertyRef Name="prisonerid" />
+            <PropertyRef Name="prisonerCellid" />
+          </Key>
+          <Property Name="prisonerid" Type="Int32" Nullable="false" />
+          <Property Name="prisonerCellid" Type="Int32" Nullable="false" />
+          <Property Name="since" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="prisonerCell" Relationship="JailModel.FK_prisonerSatyIn_prisonerCell" FromRole="prisonerSatyIn" ToRole="prisonerCell" />
+          <NavigationProperty Name="Prisoner" Relationship="JailModel.FK_prisonerSatyIn_Prisoner" FromRole="prisonerSatyIn" ToRole="Prisoner" />
+        </EntityType>
+        <EntityType Name="PrisonerWorkA">
+          <Key>
+            <PropertyRef Name="prisonerid" />
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="prisonerid" Type="Int32" Nullable="false" />
+          <Property Name="jobid" Type="Int32" Nullable="false" />
+          <Property Name="since" Type="DateTime" Precision="0" />
+          <Property Name="until" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Job" Relationship="JailModel.FK_PrisonerWorkAs_Job" FromRole="PrisonerWorkA" ToRole="Job" />
+          <NavigationProperty Name="Prisoner" Relationship="JailModel.FK_PrisonerWorkAs_Prisoner" FromRole="PrisonerWorkA" ToRole="Prisoner" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="JailEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="facilities" EntityType="Self.facility" />
+          <EntitySet Name="officerStayIns" EntityType="Self.officerStayIn" />
+          <EntitySet Name="OfficerWorkAs" EntityType="Self.OfficerWorkA" />
+          <EntitySet Name="prisonerSatyIns" EntityType="Self.prisonerSatyIn" />
+          <EntitySet Name="PrisonerWorkAs" EntityType="Self.PrisonerWorkA" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Jobs" EntityType="JailModel.Job" />
+          <AssociationSet Name="FK_Job_facility" Association="JailModel.FK_Job_facility">
+            <End Role="facility" EntitySet="facilities" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficerWorkAs_Job" Association="JailModel.FK_OfficerWorkAs_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="OfficerWorkA" EntitySet="OfficerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrisonerWorkAs_Job" Association="JailModel.FK_PrisonerWorkAs_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="PrisonerWorkA" EntitySet="PrisonerWorkAs" />
+          </AssociationSet>
+          <EntitySet Name="officerRooms" EntityType="JailModel.officerRoom" />
+          <AssociationSet Name="FK_officerStayIn_officerRoom" Association="JailModel.FK_officerStayIn_officerRoom">
+            <End Role="officerRoom" EntitySet="officerRooms" />
+            <End Role="officerStayIn" EntitySet="officerStayIns" />
+          </AssociationSet>
+          <EntitySet Name="officers" EntityType="JailModel.officer" />
+          <AssociationSet Name="FK_officerStayIn_officer" Association="JailModel.FK_officerStayIn_officer">
+            <End Role="officer" EntitySet="officers" />
+            <End Role="officerStayIn" EntitySet="officerStayIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficerWorkAs_officer" Association="JailModel.FK_OfficerWorkAs_officer">
+            <End Role="officer" EntitySet="officers" />
+            <End Role="OfficerWorkA" EntitySet="OfficerWorkAs" />
+          </AssociationSet>
+          <EntitySet Name="prisonerCells" EntityType="JailModel.prisonerCell" />
+          <AssociationSet Name="FK_prisonerSatyIn_prisonerCell" Association="JailModel.FK_prisonerSatyIn_prisonerCell">
+            <End Role="prisonerCell" EntitySet="prisonerCells" />
+            <End Role="prisonerSatyIn" EntitySet="prisonerSatyIns" />
+          </AssociationSet>
+          <EntitySet Name="AdministratorAccounts" EntityType="JailModel.AdministratorAccount" />
+          <AssociationSet Name="FK_AdministratorAccount_officer" Association="JailModel.FK_AdministratorAccount_officer">
+            <End Role="officer" EntitySet="officers" />
+            <End Role="AdministratorAccount" EntitySet="AdministratorAccounts" />
+          </AssociationSet>
+          <EntitySet Name="visitTimes" EntityType="JailModel.visitTime" />
+          <EntitySet Name="visits" EntityType="JailModel.visit" />
+          <EntitySet Name="times" EntityType="JailModel.time" />
+          <FunctionImport Name="GetAvailableAppointments" ReturnType="Collection(Time)">
+          <Parameter Name="numberOfVisitsAtTheSameTime" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Prisoners" EntityType="JailModel.Prisoner" />
+          <AssociationSet Name="FK_prisonerSatyIn_Prisoner" Association="JailModel.FK_prisonerSatyIn_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoners" />
+            <End Role="prisonerSatyIn" EntitySet="prisonerSatyIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrisonerWorkAs_Prisoner" Association="JailModel.FK_PrisonerWorkAs_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoners" />
+            <End Role="PrisonerWorkA" EntitySet="PrisonerWorkAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visit_Prisoner" Association="JailModel.FK_visit_Prisoner">
+            <End Role="Prisoner" EntitySet="Prisoners" />
+            <End Role="visit" EntitySet="visits" />
+          </AssociationSet>
+          <EntitySet Name="Adjudications" EntityType="JailModel.Adjudication" />
+          <AssociationSet Name="FK_Prisoner_Adjudication" Association="JailModel.FK_Prisoner_Adjudication">
+            <End Role="Adjudication" EntitySet="Adjudications" />
+            <End Role="Prisoner" EntitySet="Prisoners" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="jobID" />
+          </Key>
+          <Property Name="jobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dailyStartingTime" Type="Time" Precision="7" />
+          <Property Name="dailyEndingTime" Type="Time" Precision="7" />
+          <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facilityid" Type="Int32" Nullable="false" />
+          <Property Name="availablePositionsCount" Type="Int32" Nullable="false" DefaultValue="1" />
+          <Property Name="workerType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="facility" Relationship="JailModel.FK_Job_facility" FromRole="Job" ToRole="facility" />
+          <NavigationProperty Name="OfficerWorkAs" Relationship="JailModel.FK_OfficerWorkAs_Job" FromRole="Job" ToRole="OfficerWorkA" />
+          <NavigationProperty Name="PrisonerWorkAs" Relationship="JailModel.FK_PrisonerWorkAs_Job" FromRole="Job" ToRole="PrisonerWorkA" />
+        </EntityType>
+        <Association Name="FK_Job_facility">
+          <End Type="JailModel.facility" Role="facility" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facility">
+              <PropertyRef Name="facilityID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="facilityid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficerWorkAs_Job">
+          <End Type="JailModel.Job" Role="Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.OfficerWorkA" Role="OfficerWorkA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="jobID" />
+            </Principal>
+            <Dependent Role="OfficerWorkA">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrisonerWorkAs_Job">
+          <End Type="JailModel.Job" Role="Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.PrisonerWorkA" Role="PrisonerWorkA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="jobID" />
+            </Principal>
+            <Dependent Role="PrisonerWorkA">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="officerRoom">
+          <Key>
+            <PropertyRef Name="officerRoomID" />
+          </Key>
+          <Property Name="officerRoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="Double" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="officerStayIns" Relationship="JailModel.FK_officerStayIn_officerRoom" FromRole="officerRoom" ToRole="officerStayIn" />
+        </EntityType>
+        <Association Name="FK_officerStayIn_officerRoom">
+          <End Type="JailModel.officerRoom" Role="officerRoom" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.officerStayIn" Role="officerStayIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officerRoom">
+              <PropertyRef Name="officerRoomID" />
+            </Principal>
+            <Dependent Role="officerStayIn">
+              <PropertyRef Name="officerRoomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="officer">
+          <Key>
+            <PropertyRef Name="officerID" />
+          </Key>
+          <Property Name="officerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rank" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="citizinID" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="imageURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="officerStayIns" Relationship="JailModel.FK_officerStayIn_officer" FromRole="officer" ToRole="officerStayIn" />
+          <NavigationProperty Name="OfficerWorkAs" Relationship="JailModel.FK_OfficerWorkAs_officer" FromRole="officer" ToRole="OfficerWorkA" />
+          <NavigationProperty Name="AdministratorAccounts" Relationship="JailModel.FK_AdministratorAccount_officer" FromRole="officer" ToRole="AdministratorAccount" />
+        </EntityType>
+        <Association Name="FK_officerStayIn_officer">
+          <End Type="JailModel.officer" Role="officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.officerStayIn" Role="officerStayIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="officerStayIn">
+              <PropertyRef Name="officerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficerWorkAs_officer">
+          <End Type="JailModel.officer" Role="officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.OfficerWorkA" Role="OfficerWorkA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="OfficerWorkA">
+              <PropertyRef Name="officerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="prisonerCell">
+          <Key>
+            <PropertyRef Name="prisonerCellID" />
+          </Key>
+          <Property Name="prisonerCellID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <Property Name="cellType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="Double" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="availableCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="prisonerSatyIns" Relationship="JailModel.FK_prisonerSatyIn_prisonerCell" FromRole="prisonerCell" ToRole="prisonerSatyIn" />
+        </EntityType>
+        <Association Name="FK_prisonerSatyIn_prisonerCell">
+          <End Type="JailModel.prisonerCell" Role="prisonerCell" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.prisonerSatyIn" Role="prisonerSatyIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prisonerCell">
+              <PropertyRef Name="prisonerCellID" />
+            </Principal>
+            <Dependent Role="prisonerSatyIn">
+              <PropertyRef Name="prisonerCellid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdministratorAccount">
+          <Key>
+            <PropertyRef Name="administratorID" />
+          </Key>
+          <Property Name="administratorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficerID" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="roll" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="officer" Relationship="JailModel.FK_AdministratorAccount_officer" FromRole="AdministratorAccount" ToRole="officer" />
+        </EntityType>
+        <Association Name="FK_AdministratorAccount_officer">
+          <End Type="JailModel.officer" Role="officer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.AdministratorAccount" Role="AdministratorAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="officer">
+              <PropertyRef Name="officerID" />
+            </Principal>
+            <Dependent Role="AdministratorAccount">
+              <PropertyRef Name="OfficerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="visitTime">
+          <Key>
+            <PropertyRef Name="dateOfVisit" />
+          </Key>
+          <Property Name="dateOfVisit" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VisitTime1" Type="Time" Precision="7" />
+          <Property Name="num" Type="Int32" />
+        </EntityType>
+        <EntityType Name="visit">
+          <Key>
+            <PropertyRef Name="visitorID" />
+          </Key>
+          <Property Name="visitorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prisonerid" Type="Int32" Nullable="false" />
+          <Property Name="visiterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visiterSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="relashionship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfVisit" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="purposeOfVisit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="stuffBringed" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsAccepted" Type="Boolean" Nullable="false" />
+          <Property Name="VisitTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Prisoner" Relationship="JailModel.FK_visit_Prisoner" FromRole="visit" ToRole="Prisoner" />
+        </EntityType>
+        <EntityType Name="time">
+          <Key>
+            <PropertyRef Name="time1" />
+          </Key>
+          <Property Name="time1" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="Prisoner">
+          <Key>
+            <PropertyRef Name="prisonerID" />
+          </Key>
+          <Property Name="prisonerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adjudicationid" Type="Int32" Nullable="false" />
+          <Property Name="citizinid" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="imageURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="prisonerSatyIns" Relationship="JailModel.FK_prisonerSatyIn_Prisoner" FromRole="Prisoner" ToRole="prisonerSatyIn" />
+          <NavigationProperty Name="PrisonerWorkAs" Relationship="JailModel.FK_PrisonerWorkAs_Prisoner" FromRole="Prisoner" ToRole="PrisonerWorkA" />
+          <NavigationProperty Name="visits" Relationship="JailModel.FK_visit_Prisoner" FromRole="Prisoner" ToRole="visit" />
+          <NavigationProperty Name="Adjudication" Relationship="JailModel.FK_Prisoner_Adjudication" FromRole="Prisoner" ToRole="Adjudication" />
+        </EntityType>
+        <Association Name="FK_prisonerSatyIn_Prisoner">
+          <End Type="JailModel.Prisoner" Role="Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.prisonerSatyIn" Role="prisonerSatyIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="prisonerSatyIn">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrisonerWorkAs_Prisoner">
+          <End Type="JailModel.Prisoner" Role="Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.PrisonerWorkA" Role="PrisonerWorkA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="PrisonerWorkA">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visit_Prisoner">
+          <End Type="JailModel.Prisoner" Role="Prisoner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.visit" Role="visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prisoner">
+              <PropertyRef Name="prisonerID" />
+            </Principal>
+            <Dependent Role="visit">
+              <PropertyRef Name="prisonerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Adjudication">
+          <Key>
+            <PropertyRef Name="AdjudicationID" />
+          </Key>
+          <Property Name="AdjudicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="periodInDays" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="crimeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Prisoners" Relationship="JailModel.FK_Prisoner_Adjudication" FromRole="Adjudication" ToRole="Prisoner" />
+        </EntityType>
+        <Association Name="FK_Prisoner_Adjudication">
+          <End Type="JailModel.Adjudication" Role="Adjudication" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JailModel.Prisoner" Role="Prisoner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adjudication">
+              <PropertyRef Name="AdjudicationID" />
+            </Principal>
+            <Dependent Role="Prisoner">
+              <PropertyRef Name="adjudicationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JailModelStoreContainer" CdmEntityContainer="JailEntities">
+          <EntitySetMapping Name="facilities">
+            <EntityTypeMapping TypeName="JailModel.facility">
+              <MappingFragment StoreEntitySet="facility">
+                <ScalarProperty Name="facilityID" ColumnName="facilityID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="officerStayIns">
+            <EntityTypeMapping TypeName="JailModel.officerStayIn">
+              <MappingFragment StoreEntitySet="officerStayIn">
+                <ScalarProperty Name="officerRoomid" ColumnName="officerRoomid" />
+                <ScalarProperty Name="officerid" ColumnName="officerid" />
+                <ScalarProperty Name="since" ColumnName="since" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficerWorkAs">
+            <EntityTypeMapping TypeName="JailModel.OfficerWorkA">
+              <MappingFragment StoreEntitySet="OfficerWorkAs">
+                <ScalarProperty Name="officerid" ColumnName="officerid" />
+                <ScalarProperty Name="jobid" ColumnName="jobid" />
+                <ScalarProperty Name="since" ColumnName="since" />
+                <ScalarProperty Name="until" ColumnName="until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prisonerSatyIns">
+            <EntityTypeMapping TypeName="JailModel.prisonerSatyIn">
+              <MappingFragment StoreEntitySet="prisonerSatyIn">
+                <ScalarProperty Name="prisonerid" ColumnName="prisonerid" />
+                <ScalarProperty Name="prisonerCellid" ColumnName="prisonerCellid" />
+                <ScalarProperty Name="since" ColumnName="since" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrisonerWorkAs">
+            <EntityTypeMapping TypeName="JailModel.PrisonerWorkA">
+              <MappingFragment StoreEntitySet="PrisonerWorkAs">
+                <ScalarProperty Name="prisonerid" ColumnName="prisonerid" />
+                <ScalarProperty Name="jobid" ColumnName="jobid" />
+                <ScalarProperty Name="since" ColumnName="since" />
+                <ScalarProperty Name="until" ColumnName="until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JailModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="JailModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="workerType" ColumnName="workerType" />
+                <ScalarProperty Name="availablePositionsCount" ColumnName="availablePositionsCount" />
+                <ScalarProperty Name="facilityid" ColumnName="facilityid" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="dailyEndingTime" ColumnName="dailyEndingTime" />
+                <ScalarProperty Name="dailyStartingTime" ColumnName="dailyStartingTime" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="officerRooms">
+            <EntityTypeMapping TypeName="JailModel.officerRoom">
+              <MappingFragment StoreEntitySet="officerRoom">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="officerRoomID" ColumnName="officerRoomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="officers">
+            <EntityTypeMapping TypeName="JailModel.officer">
+              <MappingFragment StoreEntitySet="officer">
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="imageURL" ColumnName="imageURL" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="citizinID" ColumnName="citizinID" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="officerID" ColumnName="officerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prisonerCells">
+            <EntityTypeMapping TypeName="JailModel.prisonerCell">
+              <MappingFragment StoreEntitySet="prisonerCell">
+                <ScalarProperty Name="availableCount" ColumnName="availableCount" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="cellType" ColumnName="cellType" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="prisonerCellID" ColumnName="prisonerCellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdministratorAccounts">
+            <EntityTypeMapping TypeName="JailModel.AdministratorAccount">
+              <MappingFragment StoreEntitySet="AdministratorAccount">
+                <ScalarProperty Name="roll" ColumnName="roll" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="OfficerID" ColumnName="OfficerID" />
+                <ScalarProperty Name="administratorID" ColumnName="administratorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="visitTimes">
+            <EntityTypeMapping TypeName="JailModel.visitTime">
+              <MappingFragment StoreEntitySet="visitTimes">
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="VisitTime1" ColumnName="VisitTime" />
+                <ScalarProperty Name="dateOfVisit" ColumnName="dateOfVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="visits">
+            <EntityTypeMapping TypeName="JailModel.visit">
+              <MappingFragment StoreEntitySet="visit">
+                <ScalarProperty Name="VisitTime" ColumnName="VisitTime" />
+                <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+                <ScalarProperty Name="stuffBringed" ColumnName="stuffBringed" />
+                <ScalarProperty Name="purposeOfVisit" ColumnName="purposeOfVisit" />
+                <ScalarProperty Name="dateOfVisit" ColumnName="dateOfVisit" />
+                <ScalarProperty Name="relashionship" ColumnName="relashionship" />
+                <ScalarProperty Name="visiterSurname" ColumnName="visiterSurname" />
+                <ScalarProperty Name="visiterName" ColumnName="visiterName" />
+                <ScalarProperty Name="prisonerid" ColumnName="prisonerid" />
+                <ScalarProperty Name="visitorID" ColumnName="visitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="times">
+            <EntityTypeMapping TypeName="JailModel.time">
+              <MappingFragment StoreEntitySet="times">
+                <ScalarProperty Name="time1" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAvailableAppointments" FunctionName="JailModel.Store.GetAvailableAppointments" />
+          <EntitySetMapping Name="Prisoners">
+            <EntityTypeMapping TypeName="JailModel.Prisoner">
+              <MappingFragment StoreEntitySet="Prisoner">
+                <ScalarProperty Name="imageURL" ColumnName="imageURL" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="citizinid" ColumnName="citizinid" />
+                <ScalarProperty Name="adjudicationid" ColumnName="adjudicationid" />
+                <ScalarProperty Name="prisonerID" ColumnName="prisonerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adjudications">
+            <EntityTypeMapping TypeName="JailModel.Adjudication">
+              <MappingFragment StoreEntitySet="Adjudication">
+                <ScalarProperty Name="crimeDescription" ColumnName="crimeDescription" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="periodInDays" ColumnName="periodInDays" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="AdjudicationID" ColumnName="AdjudicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

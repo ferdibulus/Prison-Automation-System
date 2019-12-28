@@ -1,0 +1,84 @@
+﻿@model jailOtomationSystem.Models.visit
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>visit</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.prisonerid, htmlAttributes: new { @class = "control-label col-md-2" })
+         
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.surname, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.visitedPrisonerName, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.visitedPrisonerSurname, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.relashionship, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.purposeOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stuffBringed, htmlAttributes: new { @class = "control-label col-md-2" })
+            
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAccepted, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsAccepted)
+                    @Html.ValidationMessageFor(model => model.IsAccepted, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

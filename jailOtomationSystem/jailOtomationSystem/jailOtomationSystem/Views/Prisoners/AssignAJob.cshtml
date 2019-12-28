@@ -1,0 +1,77 @@
+﻿@model IEnumerable<jailOtomationSystem.Models.Job>
+
+@{
+    ViewBag.Title = "AssignAJob";
+}
+
+<h2>Assign A Job to a prisoner</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="card">
+    <div class="card-body">
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.jobTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dailyStartingTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dailyEndingTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facility.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.availablePositionsCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.workerType)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dailyStartingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dailyEndingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.facility.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.availablePositionsCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.workerType)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Assign A job ", "AssignAjobPost", new { id = item.jobID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.jobID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.jobID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.jobID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

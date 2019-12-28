@@ -1,0 +1,177 @@
+﻿@model jailOtomationSystem.viewModels.prisonerDetails
+
+@{
+    ViewBag.Title = "GetPrisonerDetails";
+}
+
+<h2>GetPrisonerDetails</h2>
+
+<div>
+    <h4>prisonerDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.prisoner.citizinid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prisoner.citizinid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prisoner.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prisoner.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prisoner.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prisoner.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prisoner.dateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prisoner.dateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prisoner.imageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prisoner.imageURL)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cell.cellType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cell.cellType)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.adjudication.crimeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adjudication.crimeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adjudication.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adjudication.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adjudication.periodInDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adjudication.periodInDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adjudication.startDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adjudication.startDate)
+        </dd>
+
+
+    </dl>
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.jobTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.job.jobTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.dailyStartingTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.job.dailyStartingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.dailyEndingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.dailyEndingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.facility.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.facility.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job.JobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.JobDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.job.JobDescription)
+        </dt>
+
+
+
+    </dl>
+</div>
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

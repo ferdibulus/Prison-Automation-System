@@ -1,0 +1,98 @@
+﻿@model jailOtomationSystem.viewModels.VisitsViewModel
+
+@{
+    ViewBag.Title = "ApplyForAvisit";
+    Layout = "~/Views/Shared/_Layoutpublic.cshtml";
+}
+
+<h2>ApplyForAvisit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>visit</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.prisonerid, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6 col-md-push-3">
+            @Html.EditorFor(model => model.visit.prisonerid, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.prisonerid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.visiterName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.visiterName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.visiterName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.visiterSurname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.visiterSurname, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.visiterSurname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.relashionship, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.relashionship, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.relashionship, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.dateOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.dateOfVisit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.dateOfVisit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.purposeOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.purposeOfVisit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.purposeOfVisit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.visit.stuffBringed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.visit.stuffBringed, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.visit.stuffBringed, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        @foreach (var item in Model.availableAppointments)
+        {
+        <label class="custom-control custom-radio custom-control-inline">
+
+            @Html.RadioButtonFor(x => x.selectedAppointment, item , new { @class = "custom-control-input"}) <span class="custom-control-label">@Html.Label(item.ToString())</span>
+        </label>
+            
+            
+        }
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
